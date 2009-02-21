@@ -7,6 +7,8 @@ license  'perl';
 
 build_requires 'Test::More';
 
+tests_recursive;
+
 auto_install;
 
 WriteAll;

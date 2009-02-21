@@ -44,7 +44,113 @@ sub register {
     $factory->setup_action( 'path' => '...' )
     $factory->render_action( 'path' => '...' )
 
+    $factory->setup_action( 'path' => '...' )
+    $factory->render_action( 'path' => '...' )
+    $factory->render( 'path' )
+    $factory->setup_method( 'path' => '...' )
+    $factory->render_method( 'path' => '...' )
+    $factory->setup_method( 'path' => '>namespace:' )
     
 }
+
+package MyProject;
+
+use Framework::Orangemash qw//;
+
+package Framework::Orange::Plugin::Starter;
+
+use strict;
+use warnings;
+
+sub register {
+
+    my ($factory) = @_;
+
+    my $identifier = $factory->identifier;
+
+    {
+        # This stuff is general purpose, can be used even if 
+        # user doesn't want a standard layout (below)
+        my $plugin = $factory->plugin( base => 'starter' )
+        $plugin->setup_action( 'base.css' => '...' )
+            $factory->setup_action_pf->entry( path => 'starter/base.css', data => {
+                method => '...',
+            } );
+        $plugin->setup_action( 'base.js' => '...' )
+        $plugin->setup_action( '.june8/base.js' => '...' )
+
+    }
+
+    # Here is the standard layout
+    $factory->setup_manifest( <<_END_ )
+run
+run/root
+run/tmp
+assets
+assets/root
+assets/root/static
+assets/root/static/css
+assets/root/static/js
+assets/tt
+_END_
+        $factory->setup_file_pf->entry( path => 'run' );
+        $factory->setup_file_pf->entry( path => 'assets/tt' );
+
+    $factory->setup_manifest( "assets/root/static/css/$identifier.css" => 'starter/base.css' )
+        # This interpolation can be done at runtime
+        $factory->setup_file_pf->entry( path => "assets/root/static/css/$identifier.css", data => {
+            content => 'starter/base.css',
+        } );
+    $factory->setup_manifest( 'assets/root/static/js/$identifier.js' => 'starter/base.js' )
+
+    # _target is an alias for _manifest/_file
+    $factory->render_target( qr/.*$/, => 'tt/render' )
+
+    # Maybe use ->on_setup or ->on_render as an alias as well?
+}
+
+package Framework::Orange::Plugin:TT;
+
+use strict;
+use warnings;
+
+sub register {
+
+    my ($factory) = @_;
+
+    {
+        my $plugin = $factory->plugin( base => 'tt' )
+        $plugin->render_action( 'render' => sub {
+        } )
+    }
+}
+
+package Framework::Orangemash::PathFetch;
+
+use strict;
+use warnings;
+
+sub test {
+
+    my $pf = PathFetch->new(
+        parser => sub { },
+        parse_ignore => sub { },
+        parse_by_line => 1)
+    # Custom entry parsing
+
+    my ($target, $entry);
+
+    $target = $pf->target(path => 'a');
+    $target = $pf->target(path => 'a/b/c', rank => 1);
+    $target = $pf->target(match => qr/.*/, rank => 1);
+    $entry = $pf->entry(path => 'a', data => { qw/a b c d/ });
+
+    $pf->find( '...' );
+
+}
+
+# PathFetch
+# PathFetch::Manifest
+# PathFetch::Finder
 
 1;
