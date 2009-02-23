@@ -1,4 +1,4 @@
-package Framework::Orangemash::PathFetch::Manifest;
+package Framework::Orangemash::PathDispatch::Manifest;
 
 use Moose;
 

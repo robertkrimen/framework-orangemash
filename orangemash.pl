@@ -1,5 +1,21 @@
 #!/usr/bin/perl -w
 
+=pod
+
+PathDispatch
+PathDispatch::Context
+
+prepare
+run
+finish
+
+before_*
+after_*
+
+Do any naming through standard Perl mechanisms
+
+=cut
+
 use strict;
 use warnings;
 

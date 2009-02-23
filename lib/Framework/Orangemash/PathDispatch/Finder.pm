@@ -1,4 +1,4 @@
-package Framework::Orangemash::PathFetch::Finder;
+package Framework::Orangemash::PathDispatch::Finder;
 
 use warnings;
 use strict;
@@ -21,15 +21,15 @@ our $VERSION = '0.01';
 
 use Moose;
 
-use Framework::Orangemash::PathFetch::Finder::Target;
-use Framework::Orangemash::PathFetch::Finder::Match;
+use Framework::Orangemash::PathDispatch::Finder::Target;
+use Framework::Orangemash::PathDispatch::Finder::Match;
 
 has targets => qw/reader _targets required 1 isa ArrayRef/, default => sub { [] };
 has __sorted_targets => qw/is rw isa Maybe[ArrayRef]/;
 
 sub target {
     my $self = shift;
-    my $target = Framework::Orangemash::PathFetch::Finder::Target->new(@_);
+    my $target = Framework::Orangemash::PathDispatch::Finder::Target->new(@_);
     push @{ $self->_targets }, $target;
     $self->__sorted_targets(undef);
 }
@@ -56,7 +56,7 @@ sub find {
     my $self = shift;
     my $path = shift;
 
-    my $match = Framework::Orangemash::PathFetch::Finder::Match->new;
+    my $match = Framework::Orangemash::PathDispatch::Finder::Match->new;
     my @targets = $self->_sorted_targets;
     for my $target (@targets) {
         if ($target->match($path)) {

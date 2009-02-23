@@ -7,9 +7,9 @@ use Test::Most;
 
 plan qw/no_plan/;
 
-use Framework::Orangemash::PathFetch::Finder;
+use Framework::Orangemash::PathDispatch::Finder;
 
-my $finder = Framework::Orangemash::PathFetch::Finder->new;
+my $finder = Framework::Orangemash::PathDispatch::Finder->new;
 my $match;
 
 $finder->target( path => 'a' );

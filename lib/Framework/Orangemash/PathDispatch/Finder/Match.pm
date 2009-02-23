@@ -1,10 +1,10 @@
-package Framework::Orangemash::PathFetch::Finder::Match;
+package Framework::Orangemash::PathDispatch::Finder::Match;
 
 use warnings;
 use strict;
 
 use Moose;
-use Framework::Orangemash::PathFetch::Finder::Carp;
+use Framework::Orangemash::PathDispatch::Finder::Carp;
 
 has _slots => qw/is ro required 1 isa HashRef/, default => sub { {} };
 has found => qw/is rw required 1 isa Int default 0/;
@@ -13,7 +13,7 @@ sub slot {
     my $self = shift;
     my $slot = shift;
     $slot = '' unless defined $slot;
-    return $self->_slots->{$slot} ||= Framework::Orangemash::PathFetch::Finder::Match::Slot->new;
+    return $self->_slots->{$slot} ||= Framework::Orangemash::PathDispatch::Finder::Match::Slot->new;
 }
 
 sub add {
@@ -23,13 +23,13 @@ sub add {
     $self->found($self->found + 1);
 }
 
-package Framework::Orangemash::PathFetch::Finder::Match::Slot;
+package Framework::Orangemash::PathDispatch::Finder::Match::Slot;
 
 use warnings;
 use strict;
 
 use Moose;
-use Framework::Orangemash::PathFetch::Finder::Carp;
+use Framework::Orangemash::PathDispatch::Finder::Carp;
 
 has targets => qw/reader _targets required 1 isa ArrayRef/, default => sub { [] };
 

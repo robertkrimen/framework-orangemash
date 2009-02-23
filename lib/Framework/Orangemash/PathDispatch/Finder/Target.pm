@@ -1,10 +1,10 @@
-package Framework::Orangemash::PathFetch::Finder::Target;
+package Framework::Orangemash::PathDispatch::Finder::Target;
 
 use warnings;
 use strict;
 
 use Moose;
-use Framework::Orangemash::PathFetch::Finder::Carp;
+use Framework::Orangemash::PathDispatch::Finder::Carp;
 
 has path => qw/is ro/;
 has matcher => qw/is ro/;

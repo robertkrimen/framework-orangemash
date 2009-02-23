@@ -3,12 +3,12 @@ use warnings;
 
 use Test::Most;
 
-use Framework::Orangemash::PathFetch::Manifest;
+use Framework::Orangemash::PathDispatch::Manifest;
 
 plan qw/no_plan/;
 
 {
-    my $manifest = Framework::Orangemash::PathFetch::Manifest->new;
+    my $manifest = Framework::Orangemash::PathDispatch::Manifest->new;
     $manifest->include(<<_END_);
     # Skip this line
 /
